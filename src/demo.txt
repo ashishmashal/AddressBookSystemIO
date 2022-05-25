@@ -1,0 +1,17 @@
+{BOOK1=[FirstName IS Ashish 
+ LastNAme Is Mashal 
+ Email Is ashish@gmail.com
+ Contact No Is 1234567890
+ Address Is SBRoad 
+ City Is Pune
+ State Is MH
+ Zip Code Is 123456 
+ ], Book2=[FirstName IS Vikas 
+ LastNAme Is Mashal 
+ Email Is vikas@gmail.com
+ Contact No Is 1234567890
+ Address Is citizen\tPark 
+ City Is Solapur
+ State Is MH
+ Zip Code Is 123456 
+ ]}
