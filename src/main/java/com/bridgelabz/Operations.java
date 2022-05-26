@@ -35,7 +35,7 @@ public class Operations implements AddressBookInterFace {
                 ArrayList<Contacts> contactDetails = new ArrayList<>();
                 oprations.MenuOption(oprations, contactDetails);
                 hashmap.put(AddressBookName, contactDetails);
-                IOFile.createFile();
+
             }
             System.out.println("AddressBook Added" + hashmap + " ");
             System.out.println("Do You Want To Continue in AddressBook the Press 1 ");
@@ -323,7 +323,10 @@ public class Operations implements AddressBookInterFace {
                     2. Edit details\s
                     3. Delete details\s
                     4. Display details\s
-                    5. Exit""");
+                    5.Search By City\s
+                    6.Write Into The File.\s
+                    7.Read From File.\s
+                    8. Exit""");
             System.out.println("Enter Option");
             menu = scanner.nextInt();
             switch (menu) {
@@ -343,6 +346,10 @@ public class Operations implements AddressBookInterFace {
                     /* Search Contact Details */
                         oprations.searchByCityOrState(contactDetails);
                 case 6 ->
+                        CSVFile.WriteDataCSV(contactDetails);
+                case 7 ->
+                        CSVFile.ReadDataCSV();
+                case 8 ->
                     /* Exiting The MenuOption */
                         System.out.println("Exit!");
 
@@ -352,6 +359,7 @@ public class Operations implements AddressBookInterFace {
             ans = scanner.nextInt();
         } while (ans == 1);
     }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void AddressBookMenu(Operations oprations) {
@@ -367,9 +375,7 @@ public class Operations implements AddressBookInterFace {
                     4.Count Person By City Or State\s
                     5.Sort By Name.\s
                     6.Sorting By Zipcode.\s
-                    7.Write Into The File.\s
-                    8.Read From File.\s
-                    9.Exit""");
+                    7.Exit""");
             System.out.println("Enter Option");
             menu = scanner.nextInt();
             switch (menu) {
@@ -389,17 +395,22 @@ public class Operations implements AddressBookInterFace {
                         sortContactsByPersonName(hashmap);
                 case 6->
                         sortContactsByZipOrCityOrState(hashmap);
-                case 7->
-                        IOFile.writingFile();
+                case 7 -> {
+                    IOFile.createFile();
+                    IOFile.writingFile();
+                }
                 case 8->
                         IOFile.readFromFile();
-                case 9 ->
+                case 11 ->
                 System.out.println("Exit");
 
             }
 
-            System.out.print("Do You Want TO Continue In Address Book Menu Option if Yes Enter \n " +
-                    "1 For continue or Else Enter \n 2 For Exit.\n ");
+            System.out.print("""
+                    Do You Want TO Continue In Address Book Menu Option if Yes Enter\s
+                     1 For continue or Else Enter\s
+                     2 For Exit.
+                    \s""");
             ans = scanner.nextInt();
         } while (ans == 1);
     }

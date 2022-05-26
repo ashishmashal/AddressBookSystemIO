@@ -5,13 +5,7 @@ import java.util.Scanner;
 
 public class IOFile {
     static File file = new File("//home//hp//IdeaProjects//AddressBookSystemProject//src//demo.txt");
-static Scanner scanner = new Scanner(System.in);
-//    public static void main(String[] args) throws IOException {
-//        createFile();
-//        //getFileInfo();
-//        writingFile();
-//        readFile();
-//    }
+
     public static void createFile() {
         try {
             if (file.createNewFile()) {
@@ -28,7 +22,7 @@ static Scanner scanner = new Scanner(System.in);
     public static void writingFile(){
         try {
             FileWriter fileWriter = new FileWriter(file);
-            fileWriter.write(String.valueOf(Operations.contactsDetails));
+            fileWriter.write(String.valueOf(Operations.hashmap));
             System.out.println("Data Wrote Successfully");
             fileWriter.close();
 
