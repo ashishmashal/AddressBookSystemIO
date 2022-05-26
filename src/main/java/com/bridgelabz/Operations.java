@@ -326,7 +326,9 @@ public class Operations implements AddressBookInterFace {
                     5.Search By City\s
                     6.Write Into The File.\s
                     7.Read From File.\s
-                    8. Exit""");
+                    8.Write In to Json File\s
+                    9.Read From Json File\s
+                    10. Exit""");
             System.out.println("Enter Option");
             menu = scanner.nextInt();
             switch (menu) {
@@ -350,6 +352,10 @@ public class Operations implements AddressBookInterFace {
                 case 7 ->
                         CSVFile.ReadDataCSV();
                 case 8 ->
+                        JsonFile.WriteDataJSON(contactDetails);
+                case 9->
+                        JsonFile.ReadDataJSON();
+                case 10->
                     /* Exiting The MenuOption */
                         System.out.println("Exit!");
 
