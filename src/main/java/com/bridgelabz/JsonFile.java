@@ -12,13 +12,13 @@ public class JsonFile {
 	public static final String SAMPLE_JSON_FILE = "//home//hp//IdeaProjects//AddressBookSystemProject//src//main//resources//Demo.json";
 
 	public static void WriteDataJSON(ArrayList<Contacts> contactDetails) {
-		for (Contacts contacts : contactDetails)
-			try (BufferedWriter writer = new BufferedWriter(new FileWriter(SAMPLE_JSON_FILE, true))) {
-				writer.write(contacts.getFirstName() + "\t\t" + contacts.getLastName() + "\t" + contacts.getContactNo() + "\t" + contacts.getEmail() +
-						"\t" + contacts.getAddress() + "\t" + contacts.getCity() + "\t" + contacts.getState() + "\t" + contacts.getZipCode() + "\n\s");
-			} catch (IOException e) {
-				throw new RuntimeException(e);
-			}
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(SAMPLE_JSON_FILE, true))) {
+			Gson gson = new Gson();
+			String jsonString = gson.toJson(contactDetails);
+			writer.write(jsonString);
+		} catch (IOException ex) {
+			throw new RuntimeException(ex);
+		}
 	}
 
 	public static void ReadDataJSON() {
