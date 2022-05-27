@@ -1,5 +1,6 @@
 package com.bridgelabz;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -21,7 +22,7 @@ public class Operations implements AddressBookInterFace {
     /*
     method For Adding Multiple Address Book.
      */
-    public void AddressBook(Operations oprations) {
+    public void AddressBook(Operations oprations) throws IOException {
         int ans;
         do {
             System.out.println("Enter Name For Address Book");
@@ -313,7 +314,7 @@ public class Operations implements AddressBookInterFace {
         /*
         Displaying the Menu Options Person.
          */
-    public void MenuOption(Operations oprations, ArrayList<Contacts> contactDetails) {
+    public void MenuOption(Operations oprations, ArrayList<Contacts> contactDetails) throws IOException {
         System.out.println("Enter a number to perform For Persons action: ");
         int menu, ans;
         do {
@@ -324,8 +325,8 @@ public class Operations implements AddressBookInterFace {
                     3. Delete details\s
                     4. Display details\s
                     5.Search By City\s
-                    6.Write Into The File.\s
-                    7.Read From File.\s
+                    6.Write Into The CSV File.\s
+                    7.Read From CSV File.\s
                     8.Write In to Json File\s
                     9.Read From Json File\s
                     10. Exit""");
@@ -368,7 +369,7 @@ public class Operations implements AddressBookInterFace {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void AddressBookMenu(Operations oprations) {
+    public void AddressBookMenu(Operations oprations) throws IOException {
         System.out.println("Enter a number to perform AddressBook actions: ");
         int menu, ans;
 

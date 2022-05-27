@@ -1,11 +1,12 @@
 package com.bridgelabz;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
  interface AddressBookInterFace {
-     void AddressBook(Operations oprations);
+     void AddressBook(Operations oprations) throws IOException;
 
      void displayAddressBook();
 
@@ -17,9 +18,9 @@ import java.util.List;
 
      void deleteContact(ArrayList<Contacts> contactDetails);
 
-     void MenuOption(Operations oprations, ArrayList<Contacts> contactDetails);
+     void MenuOption(Operations oprations, ArrayList<Contacts> contactDetails) throws IOException;
 
-      void AddressBookMenu(Operations oprations);
+      void AddressBookMenu(Operations oprations) throws IOException;
 
      List<Contacts> SearchInMultipleAddressBook(String name);
 
