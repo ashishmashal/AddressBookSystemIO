@@ -1,0 +1,156 @@
+================================================================UC1=================================================
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| payroll_services   |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> create database AddressBookService;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> use AddressBookService;
+Database changed
+
+
+mysql> select database();
++--------------------+
+| database()         |
++--------------------+
+| AddressBookService |
++--------------------+
+1 row in set (0.00 sec)
+
+
+================================================ UC2 ===================================================================
+
+mysql> CREATE TABLE addressbook (
+    ->      fName varchar(50) NOT NULL,
+    ->      lName varchar(50) NOT NULL,
+    ->      address varchar(100) NOT NULL,
+    ->      city varchar(20) NOT NULL ,
+    ->      state varchar(30) NOT NULL,
+    ->      zip varchar(10) NOT NULL,
+    ->      phoneNO varchar(20) NOT NULL,
+    ->      email varchar(50) NOT NULL
+    ->      );
+Query OK, 0 rows affected (0.04 sec)
+
+
+mysql> desc addressbook;
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| fName   | varchar(50)  | NO   |     | NULL    |       |
+| lName   | varchar(50)  | NO   |     | NULL    |       |
+| address | varchar(100) | NO   |     | NULL    |       |
+| city    | varchar(20)  | NO   |     | NULL    |       |
+| state   | varchar(30)  | NO   |     | NULL    |       |
+| zip     | varchar(10)  | NO   |     | NULL    |       |
+| phoneNO | varchar(20)  | NO   |     | NULL    |       |
+| email   | varchar(50)  | NO   |     | NULL    |       |
++---------+--------------+------+-----+---------+-------+
+8 rows in set (0.01 sec)
+
+
+================================================ UC3 ===================================================================
+
+
+mysql> INSERT INTO addressbook
+    ->      VALUES   ('Ashish','Mashal','sbRoad','Pune','MH','4160011','8380805787','ashish@gmail.com'), ('Vicky','Jo','ABC','Pune','MH','4160011','1234567890','vicky@gmail.com'), ('Vikas','Mashal','citizen park','Solapur','MH','413004','1234567890','vikas@gmail.com');
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from addressbook;
++--------+--------+--------------+---------+-------+---------+------------+------------------+
+| fName  | lName  | address      | city    | state | zip     | phoneNO    | email            |
++--------+--------+--------------+---------+-------+---------+------------+------------------+
+| Ashish | Mashal | sbRoad       | Pune    | MH    | 4160011 | 8380805787 | ashish@gmail.com |
+| Vicky  | Jo     | ABC          | Pune    | MH    | 4160011 | 1234567890 | vicky@gmail.com  |
+| Vikas  | Mashal | citizen park | Solapur | MH    | 413004  | 1234567890 | vikas@gmail.com  |
++--------+--------+--------------+---------+-------+---------+------------+------------------+
+3 rows in set (0.00 sec)
+
+
+================================================ UC4 ===================================================================
+
+
+mysql> select * from addressbook where fName = 'Ashish';
++--------+--------+---------+------+-------+---------+------------+------------------+
+| fName  | lName  | address | city | state | zip     | phoneNO    | email            |
++--------+--------+---------+------+-------+---------+------------+------------------+
+| Ashish | Mashal | sbRoad  | Pune | MH    | 4160011 | 8380805787 | ashish@gmail.com |
++--------+--------+---------+------+-------+---------+------------+------------------+
+1 row in set (0.00 sec)
+
+mysql> update addressbook SET city = 'Banglore' where fName = 'Ashish';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from addressbook where fName='Ashish';
++--------+--------+---------+----------+-------+---------+------------+------------------+
+| fName  | lName  | address | city     | state | zip     | phoneNO    | email            |
++--------+--------+---------+----------+-------+---------+------------+------------------+
+| Ashish | Mashal | sbRoad  | Banglore | MH    | 4160011 | 8380805787 | ashish@gmail.com |
++--------+--------+---------+----------+-------+---------+------------+------------------+
+1 row in set (0.00 sec)
+
+
+================================================ UC5 ===================================================================
+
+
+mysql> DELETE  FROM addressbook where fName='Vikas';
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from addressbook;
++--------+--------+---------+----------+-------+---------+------------+------------------+
+| fName  | lName  | address | city     | state | zip     | phoneNO    | email            |
++--------+--------+---------+----------+-------+---------+------------+------------------+
+| Ashish | Mashal | sbRoad  | Banglore | MH    | 4160011 | 8380805787 | ashish@gmail.com |
+| Vicky  | Jo     | ABC     | Pune     | MH    | 4160011 | 1234567890 | vicky@gmail.com  |
++--------+--------+---------+----------+-------+---------+------------+------------------+
+2 rows in set (0.00 sec)
+
+
+================================================ UC6 ===================================================================
+
+
+mysql> select * from addressbook where city='Banglore' AND State ='KA';
++--------+--------+---------+----------+-------+---------+------------+------------------+
+| fName  | lName  | address | city     | state | zip     | phoneNO    | email            |
++--------+--------+---------+----------+-------+---------+------------+------------------+
+| Ashish | Mashal | sbRoad  | Banglore | KA    | 4160011 | 8380805787 | ashish@gmail.com |
++--------+--------+---------+----------+-------+---------+------------+------------------+
+1 row in set (0.00 sec)
+
+
+================================================ UC7 ===================================================================
+
+
+mysql> select city,state,LENGTH(city) AS LengthOfCity , LENGTH(state) AS LengthOfState from addressbook;
++----------+-------+--------------+---------------+
+| city     | state | LengthOfCity | LengthOfState |
++----------+-------+--------------+---------------+
+| Banglore | KA    |            8 |             2 |
+| Pune     | MH    |            4 |             2 |
++----------+-------+--------------+---------------+
+2 rows in set (0.00 sec)
+
+
+================================================ UC8 ===================================================================
+
+mysql> select fName from addressbook ORDER BY city ASC;
++--------+
+| fName  |
++--------+
+| Ashish |
+| Vicky  |
++--------+
+2 rows in set (0.00 sec)
+
