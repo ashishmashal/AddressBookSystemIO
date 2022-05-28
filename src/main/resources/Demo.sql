@@ -133,14 +133,13 @@ mysql> select * from addressbook where city='Banglore' AND State ='KA';
 ================================================ UC7 ===================================================================
 
 
-mysql> select city,state,LENGTH(city) AS LengthOfCity , LENGTH(state) AS LengthOfState from addressbook;
-+----------+-------+--------------+---------------+
-| city     | state | LengthOfCity | LengthOfState |
-+----------+-------+--------------+---------------+
-| Banglore | KA    |            8 |             2 |
-| Pune     | MH    |            4 |             2 |
-+----------+-------+--------------+---------------+
-2 rows in set (0.00 sec)
+mysql> select COUNT(city)  CountOfCity ,COUNT(state) CountOfState from addressbook;
++-------------+--------------+
+| CountOfCity | CountOfState |
++-------------+--------------+
+|           2 |            2 |
++-------------+--------------+
+1 row in set (0.00 sec)
 
 
 ================================================ UC8 ===================================================================
