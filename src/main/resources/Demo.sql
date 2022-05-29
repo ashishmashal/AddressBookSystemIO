@@ -62,8 +62,10 @@ mysql> desc addressbook;
 ================================================ UC3 ===================================================================
 
 
-mysql> INSERT INTO addressbook
-    ->      VALUES   ('Ashish','Mashal','sbRoad','Pune','MH','4160011','8380805787','ashish@gmail.com'), ('Vicky','Jo','ABC','Pune','MH','4160011','1234567890','vicky@gmail.com'), ('Vikas','Mashal','citizen park','Solapur','MH','413004','1234567890','vikas@gmail.com');
+mysql> INSERT INTO addressbook  VALUES
+   ('Ashish','Mashal','sbRoad','Pune','MH','4160011','8380805787','ashish@gmail.com'),
+   ('Vicky','Jo','ABC','Pune','MH','4160011','1234567890','vicky@gmail.com'),
+   ('Vikas','Mashal','citizen park','Solapur','MH','413004','1234567890','vikas@gmail.com');
 Query OK, 3 rows affected (0.01 sec)
 Records: 3  Duplicates: 0  Warnings: 0
 
@@ -132,7 +134,6 @@ mysql> select * from addressbook where city='Banglore' AND State ='KA';
 
 ================================================ UC7 ===================================================================
 
-
 mysql> select COUNT(city)  CountOfCity ,COUNT(state) CountOfState from addressbook;
 +-------------+--------------+
 | CountOfCity | CountOfState |
@@ -152,4 +153,59 @@ mysql> select fName from addressbook ORDER BY city ASC;
 | Vicky  |
 +--------+
 2 rows in set (0.00 sec)
+
+
+================================================ UC9 ==================================================================
+
+mysql> ALTER TABLE addressbook ADD type varchar(150) NOT NULL AFTER lName;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE addressbook ADD name varchar(20) NOT NULL AFTER type;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO addressbook
+ VALUES
+ ('Shubham','Kande','Friends','TCS','street 1','taxes','CA','123456','1234567890','shubham@gmail.com'),
+ ('vikas','mashal','Family','WIPRO','citizen park','solapur','MH','123456','1234567890','vikas@gmail.com'),
+ ('mahesh','kumar','Profession','AMAZON','street  2','taxes','CA','123456','1234567890','mahesh@gmail.com');
+Query OK, 3 rows affected (0.02 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from addressbook;
++---------+--------+------------+--------+--------------+----------+-------+---------+------------+-------------------+
+| fName   | lName  | type       | name   | address      | city     | state | zip     | phoneNO    | email             |
++---------+--------+------------+--------+--------------+----------+-------+---------+------------+-------------------+
+| Ashish  | Mashal |            |        | sbRoad       | Banglore | KA    | 4160011 | 8380805787 | ashish@gmail.com  |
+| Vicky   | Jo     |            |        | ABC          | Pune     | MH    | 4160011 | 1234567890 | vicky@gmail.com   |
+| Shubham | Kande  | Friends    | TCS    | street 1     | taxes    | CA    | 123456  | 1234567890 | shubham@gmail.com |
+| vikas   | mashal | Family     | WIPRO  | citizen park | solapur  | MH    | 123456  | 1234567890 | vikas@gmail.com   |
+| mahesh  | kumar  | Profession | AMAZON | street  2    | taxes    | CA    | 123456  | 1234567890 | mahesh@gmail.com  |
++---------+--------+------------+--------+--------------+----------+-------+---------+------------+-------------------+
+5 rows in set (0.00 sec)
+
+
+================================================ UC10 ==================================================================
+mysql> SELECT COUNT(fName) AS contacts_count_by_type FROM addressbook WHERE type = 'Profession';
++------------------------+
+| contacts_count_by_type |
++------------------------+
+|                      1 |
++------------------------+
+1 row in set (0.00 sec)
+
+
+
+================================================ UC11 ==================================================================
+
+mysql> INSERT INTO addressbook
+VALUES('shikar','dhavan','Friends','TCS','random_address','delhi','delhi','123456','1234567890','shikar@gmail.com'),
+('srikar','msk','Family','WIPRO','random_address','solapur','MH','123456','1234567890','srikar@gmail.com');
+Query OK, 2 rows affected (0.00 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+
+
+
 
