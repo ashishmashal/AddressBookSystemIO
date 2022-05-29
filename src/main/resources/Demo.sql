@@ -143,7 +143,6 @@ mysql> select COUNT(city)  CountOfCity ,COUNT(state) CountOfState from addressbo
 1 row in set (0.00 sec)
 
 
-
 ================================================ UC8 ===================================================================
 
 mysql> select fName from addressbook ORDER BY city ASC;
