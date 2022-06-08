@@ -1,7 +1,9 @@
 package com.bridgelabz;
 
 import java.io.*;
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class IOFile {
     static File file = new File("//home//hp//IdeaProjects//AddressBookSystemProject//src//demo.txt");
@@ -19,19 +21,25 @@ public class IOFile {
 
     }
 
-    public static void writingFile(){
-        try {
-            FileWriter fileWriter = new FileWriter(file);
-            fileWriter.write(String.valueOf(Operations.hashmap));
-            System.out.println("Data Wrote Successfully");
-            fileWriter.close();
+    public static boolean writingFile(HashMap<String, ArrayList<Contacts>> hashmap) {
+        for (Map.Entry<String, ArrayList<Contacts>> addressBookHashMap : hashmap.entrySet()) {
+            ArrayList<Contacts> values = addressBookHashMap.getValue();
+            for (Contacts p : values)
+            /* writer reads the current line and the Java readLine function writer.readLine() returns a string.
+             Hence, the loop will iterate until it’s not null.*/
+                try (BufferedWriter writer1 = new BufferedWriter(new FileWriter(file, true))) {
+                    writer1.write("\nAddress Book Name- "+addressBookHashMap.getKey()+"\tFirst Name- " + p.getFirstName() + "\tLast Name- " + p.getLastName()
+                            + "\tContact Number- " + p.getContactNo() + "\tEmail- " + p.getEmail() + "\tAddress- " + p.getAddress() + "\tCity- " + p.getCity()
+                            + "\tState-" + p.getState() + "\tZip Code- " + p.getZipCode());
 
-        }catch (IOException e)
-        {
-            e.printStackTrace();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+
+                }
         }
+        return true;
     }
-    public static void readFromFile() {
+    public static boolean readFromFile() {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file));
             String st;
@@ -40,6 +48,7 @@ public class IOFile {
 
                 System.out.println(st);
             }
+            return true;
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }

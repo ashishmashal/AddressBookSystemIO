@@ -14,38 +14,42 @@ import java.util.Map;
 public class CSVFile {
 	public static final String SAMPLE_CSV_FILE = "//home//hp//IdeaProjects//AddressBookSystemProject//src//main//resources//Demo.csv";
 
-	public static void WriteDataCSV(ArrayList<Contacts> contactDetails){
-
-			try (BufferedWriter writer = new BufferedWriter(new FileWriter(SAMPLE_CSV_FILE, true));
-				CSVWriter csvWriter = new CSVWriter(writer,',')){
-			for (Contacts contacts:contactDetails) {
-				//System.out.println("First Name\t\t Last Name \t Contact Number \t Email \t Address \t City \t State \t Zip Code");
-			String[] s=	{"First Name : " + contacts.getFirstName() , "Last Name :" + contacts.getLastName() , "Contact No :" + contacts.getContactNo(),  "Email :" + contacts.getEmail() ,
-						"Address :" + contacts.getAddress() , "City :" + contacts.getCity() , "State :" + contacts.getState() , "ZipCode :" + contacts.getZipCode() };
-				csvWriter.writeNext(s);
+	public static boolean WriteDataCSV(HashMap<String, ArrayList<Contacts>> hashmap) throws IOException {
+		try (Writer writer = Files.newBufferedWriter(Paths.get(SAMPLE_CSV_FILE));
+		     CSVWriter csvWriter = new CSVWriter(writer, ',');) {
+			System.out.println("First Name\t\t Last Name \t Contact Number \t Email \t Address \t City \t State \t Zip Code");
+			for (Map.Entry<String, ArrayList<Contacts>> addressBookMapEntry : hashmap.entrySet()) {
+				ArrayList<Contacts> values = addressBookMapEntry.getValue();
+				for (Contacts c : values) {
+					String[] s = {"AddressBook Name:" + addressBookMapEntry.getKey(), "First Name:" + c.getFirstName(), "Last Name:" + c.getLastName(), "Contact No:" + c.getContactNo(), "Email ID:" + c.getEmail(), "Address:" + c.getAddress(), "City:" + c.getCity()
+							, "State:" + c.getState(), "Zip Code:" + c.getZipCode()};
+					csvWriter.writeNext(s);
+				}
 			}
-			}catch (IOException e){
-				e.printStackTrace();
-			}
-
+			return true;
+		}
 	}
 
-	public static void ReadDataCSV() {
+	public static boolean ReadDataCSV() {
 		try (
 				Reader reader = Files.newBufferedReader(Paths.get(SAMPLE_CSV_FILE));
 				CSVReader csvReader = new CSVReader(reader)
 		) {
-			String[] nextLine;
+			String nextLine[];
 			while ((nextLine = csvReader.readNext()) != null) {
-				for (String strings : nextLine) {
-					System.out.print("\t" + strings + "\n");
+				for(String token : nextLine)
+				{
+					System.out.print("\t");
+					System.out.print(token);
 				}
-
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+			return true;
+		} catch (Exception e){
+			System.out.println(e);
 		}
+		return false;
 	}
+
 
 
 }
