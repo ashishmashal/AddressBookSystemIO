@@ -1,7 +1,26 @@
 package com.bridgelabz;
 
-class Contacts {
+public class Contacts {
+    public  String book_name;
+    public  String type;
     private String firstName, lastName, address, city, state, zipCode, contactNo, email;
+
+    public Contacts(String first_name, String last_name, long contactNo, String email, String address, String city, String state, int zipCode, String book_name, String type) {
+        this.firstName=first_name;
+        this.lastName=last_name;
+        this.contactNo= String.valueOf(contactNo);
+        this.email=email;
+        this.address=address;
+        this.city=city;
+        this.state=state;
+        this.zipCode= String.valueOf(zipCode);
+        this.book_name=book_name;
+        this.type=type;
+    }
+
+	public Contacts() {
+		
+	}
 
     public String getFirstName() {
         return firstName;
@@ -33,6 +52,12 @@ class Contacts {
 
     public String getZipCode() {
         return zipCode;
+    }
+    public String getType(){
+        return type;
+    }
+    public String getBookType(){
+        return book_name;
     }
 
     public void setFirstName(String firstName) {

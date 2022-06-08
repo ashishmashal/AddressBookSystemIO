@@ -12,7 +12,7 @@ public class Operations implements AddressBookInterFace {
     static Scanner scanner = new Scanner(System.in);
 
 
-    static HashMap<String, ArrayList<Contacts>> hashmap = new HashMap<>();
+    public static HashMap<String, ArrayList<Contacts>> hashmap = new HashMap<>();
     HashMap<String, ArrayList<Contacts>> addressBook;
     public Operations() {
         addressBook = new HashMap<>();
@@ -63,10 +63,9 @@ public class Operations implements AddressBookInterFace {
             info.setCity(scanner.next());
             System.out.println("Enter state name: ");
             info.setState(scanner.next());
-            System.out.println("Enter zip code: ");
-            info.setZipCode(scanner.next());
+            info.setZipCode(String.valueOf(scanner.nextInt()));
             System.out.println("Enter contact no.: ");
-            info.setContactNo(scanner.next());
+            info.setContactNo(String.valueOf(scanner.nextInt()));
             System.out.println("Enter email: ");
             info.setEmail(scanner.next());
             contactDetails.add(info);
@@ -95,9 +94,9 @@ public class Operations implements AddressBookInterFace {
                     System.out.println("Enter state name: ");
                     info.setState(scanner.next());
                     System.out.println("Enter zip code: ");
-                    info.setZipCode(scanner.next());
+                    info.setZipCode(String.valueOf(scanner.nextInt()));
                     System.out.println("Enter contact no.: ");
-                    info.setContactNo(scanner.next());
+                    info.setContactNo(String.valueOf(scanner.nextInt()));
                     System.out.println("Enter email: ");
                     info.setEmail(scanner.next());
                     contactDetails.add(info);
@@ -349,11 +348,11 @@ public class Operations implements AddressBookInterFace {
                     /* Search Contact Details */
                         oprations.searchByCityOrState(contactDetails);
                 case 6 ->
-                        CSVFile.WriteDataCSV(contactDetails);
+                        CSVFile.WriteDataCSV(hashmap);
                 case 7 ->
                         CSVFile.ReadDataCSV();
                 case 8 ->
-                        JsonFile.WriteDataJSON(contactDetails);
+                        JsonFile.WriteDataJSON(hashmap);
                 case 9->
                         JsonFile.ReadDataJSON();
                 case 10->
@@ -404,7 +403,7 @@ public class Operations implements AddressBookInterFace {
                         sortContactsByZipOrCityOrState(hashmap);
                 case 7 -> {
                     IOFile.createFile();
-                    IOFile.writingFile();
+                    IOFile.writingFile(hashmap);
                 }
                 case 8->
                         IOFile.readFromFile();
